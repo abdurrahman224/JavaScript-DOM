@@ -50,24 +50,16 @@ const length = student.length;
 for (let i = 0; i < length; i++) {
   if (student[i].score >= 70) {
     passesCount++;
-  }else if(student[i].score <=60){
-faliCount++;
-    
-  }else {
-
+  } else if (student[i].score <= 60) {
+    faliCount++;
+  } else {
     console.log(`Students is not defined`);
-    
   }
 }
 console.log(`Passed Students : ${passesCount}`);
 console.log(`Fail Students :  ${faliCount}`);
 
-
 console.log(student);
-
-
-
-
 
 /**
  * 
@@ -89,16 +81,49 @@ forEach: Iterate and print all product names and their stock.
 if/else: Check if stock === 0 (out of stock) or stock < 5 (low stock).
  */
 
-
-
-
-const product = [
+const products = [
   { id: 101, name: "Laptop", price: 1200, stock: 5 },
   { id: 102, name: "Mouse", price: 25, stock: 0 },
   { id: 103, name: "Keyboard", price: 75, stock: 12 },
-  { id: 104, name: "Monitor", price: 300, stock: 1 }
-]
+  { id: 104, name: "Monitor", price: 300, stock: 1 },
+
+];
+
+products.forEach(products =>{
+console.log(`${products.name} - ${products.stock} in Stock`);
 
 
+})
 
-product 
+console.log('-------------------------------------------');
+
+
+products.forEach((products) => {
+
+
+  if (products.stock === 0) {
+    console.log(`${products.name} Out of stock `);
+  } else if (products.stock < 5) {
+    console.log(`${products.name} Low stock`);
+  }else{
+
+    console.log(`${products.name} in stock`);
+    
+  }
+});
+
+
+let i =0;
+
+
+ while(  products [i]){
+
+ if(products[i].stock < 2){
+
+
+console.log(`${products[i].name} -- Very Low Stock ${products[i].stock}`);
+
+}
+i++
+
+ }
