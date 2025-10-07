@@ -428,3 +428,118 @@ let removed = numbers.pop();
 console.log(removed);
 console.log(numbers);
 
+// Task 23: shift Method
+// Scenario: Customer Queue
+// Description: Use an array of names. Use the shift method to process (remove) and print the first customer in the queue.
+// Hint: Remove Front: queue.shift()..
+// Example: const queue = ["Anya", "Ben", "Chloe"];
+ 
+const queue = ["Anya", "Ben", "Chloe"];
+ let served = queue.shift();
+ 
+console.log("Served customer:", served);
+console.log("reminig queue :", queue);
+
+
+// Task 24: unshift Method
+// Scenario: VIP Insertion
+// Description: Use the queue array from Task 23. Use unshift to add "VIP Customer" to the beginning of the queue.
+// Hint: Add Front: queue.unshift("VIP Customer").
+// Example: const queue = ["Ben", "Chloe"];
+ 
+const cheng = ["Ben", "Chloe"];
+ 
+cheng.unshift("VIP INsertion");
+ 
+console.log("Updet queue:", cheng);
+
+
+
+// Task 25: for...of Loop
+// Scenario: Movie Marathon
+// Description: Use the array of movie titles. Use a for...of loop to print every title.
+// Hint: Value Iteration: for (const movie of movies) { ... }
+// Example: const movies = ["Dune", "Arrival", "Interstellar"];
+ 
+const movies = ["Dune", "Arrival", "Interstellar"];
+ 
+for (const movie of movies){
+    console.log(movie);
+   
+}
+
+
+
+// Task 26: for...in Loop (Keys)
+// Scenario: Inventory Check
+// Description: Use the object. Use a for...in loop to print the name of each property (the inventory key/fruit name).
+// Hint: Key Iteration: for (const fruit in inventory) { ... }
+// Example: const inventory = { apples: 5, bananas: 10, oranges: 3 };
+ 
+const inventory = { apples: 5, bananas: 10, oranges: 3 };
+ 
+for (const fruit in inventory){
+    console.log(fruit);
+   
+}
+
+
+// Task 27: for...in Loop (Values)
+// Scenario: Price Listing
+// Description: Use the inventory object. Use a for...in loop to print both the fruit name (key) and its quantity (value).
+// Hint: Access Value: Use inventory[fruit] inside the loop.
+// Example: const inventory = { apples: 5, bananas: 10 };
+ 
+const inventor = {
+  apples: 5,
+  bananas: 10
+};
+ 
+for (const fruit in inventor) {
+  console.log(fruit + ": " + inventor[fruit]);
+}
+ 
+
+// Task 28: slice (Copy)
+// Scenario: Save Game State
+// Description: Create an array of high scores. Use the slice() method with no arguments to create a new copy of the scores.
+// Hint: Copying: const newScores = originalScores.slice();
+// Example: const originalScores = [100, 90, 80];
+ 
+let originalScores = [100, 90, 80, 70, 60]
+ const newScores = originalScores.slice();
+ 
+ console.log("Original Scores:", originalScores);
+console.log("Copied Scores:", newScores);
+
+
+// Task 29: slice (Partial)
+// Scenario: Top 3 Scores
+// Description: Use the high scores array. Use slice(0, 3) to extract and print only the first three scores.
+// Hint: Extract Range: allScores.slice(startIndex, endIndex). Remember the end index is exclusive.
+// Example: const allScores = [100, 90, 80, 70, 60];
+ 
+const allScores = [100, 90, 80, 70, 60];
+ 
+const score = allScores.slice(0, 3);
+ 
+console.log("All Scores:", allScores);
+console.log("Top 3 Scores:", score);
+
+
+// Task 30: Loop & Array Combo
+// Scenario: Filter List
+// Description: Use the array of numbers. Use a for...of loop and an if statement to push numbers greater than 10 into a new array.
+// Hint: Combine: Start with const filtered = [];. Use filtered.push(...) inside the conditional loop.
+// Example: const data = [5, 12, 3, 22, 8];
+const data = [5, 12, 3, 22, 8];
+const filtered = [];
+ 
+for (const number of data) {
+  if (number > 10) {
+    filtered.push(number);
+  }
+}
+ 
+console.log("Original Data:", data);
+console.log("Filtered Data (greater than 10):", filtered);
