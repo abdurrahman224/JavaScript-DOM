@@ -16,42 +16,92 @@ const images = [
   "	https://cdn.pixabay.com/photo/2016/10/26/10/05/book-1771073_1280.jpg",
   "https://cdn.pixabay.com/photo/2020/01/30/17/49/book-4806076_1280.jpg",
 ];
-let index =  0;
-const gallery = document.getElementById('gallery')
-function nextImage (){
-
+let index = 0;
+const gallery = document.getElementById("gallery");
+function nextImage() {
   index = (index + 1) % images.length;
 
   gallery.src = images[index];
-
 }
 
 function prevImage() {
-  index = (index - 1+images.length) % images.length;
+  index = (index - 1 + images.length) % images.length;
 
   gallery.src = images[index];
 }
 
+const myForm = document.getElementById("myForm");
+const email = document.getElementById("email");
+const error = document.getElementById("error");
 
-const myForm = document.getElementById('myForm');
-const email = document.getElementById('email');
-const error = document.getElementById('error')
-
-myForm.addEventListener('submit', function(event){
-
-event.preventDefault();
-if(email.value.trim()===""){
-
-
-    error.style.display = 'block';
+myForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  if (email.value.trim() === "") {
+    error.style.display = "block";
     // email.focus();
-}else{
-
-
-    error.style.display = 'nane'
-    alert(`Form submitted successfully! Email: ${email.value}`)
+  } else {
+    error.style.display = "nane";
+    alert(`Form submitted successfully! Email: ${email.value}`);
     myForm.reset();
-}
+  }
+});
+
+const tweet = document.getElementById("tweet");
+const charCount = document.getElementById("charCount");
+const maxCount = 240;
+
+tweet.addEventListener("input", () => {
+  const remaining = maxCount - tweet.value.length;
+  charCount.textContent = `${remaining} characters remaining`;
+  if (remaining < 0) {
+    charCount.style.color = "red";
+    tweet.style.borderColor = "red";
+  } else if(remaining<150){
+
+     charCount.style.color = "orange";
+    tweet.style.borderColor = "orange";
+  }
+  else {
+ charCount.style.color = "green";
+    tweet.style.borderColor = "#ccc";
+  }
+});
+
+document.getElementById("submitBtn").addEventListener("click", () => {
+  if (tweet.value.length === 0) {
+    alert("Tweet cannot be empty!");
+  }else if(tweet.value.length>maxCount){
+
+    alert('Tweet exceeds the character    limit!')
+  }else{
+
+    alert(`Tweet submitted: ${tweet.value}`)
+    charCount.textContent= `${maxCount} characters remaining`;
+    charCount.classList.remove('exceeded')
+  }
+});
 
 
-})
+
+
+
+
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach((item) => {
+  const question = item.querySelector(".faq-question");
+
+  question.addEventListener("click", () => {
+    
+    faqItems.forEach((i) => {
+      if (i !== item) i.classList.remove("active");
+    });
+
+   
+    item.classList.toggle("active");
+  });
+});
+
+
+
