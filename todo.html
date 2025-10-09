@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      li {
+        padding: 8px;
+        margin: 4px 0;
+        cursor: pointer; /* Indicates it's interactive */
+        border-bottom: 1px solid #eee;
+      }
+      input {
+        width: 80%;
+        padding: 5px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="todo-list">
+      <li>Buy Milk</li>
+      <li>Read Quran</li>
+      <li>Complete Homework</li>
+      <li>Buy Milk</li>
+      <li>Read Quran</li>
+      <li>Complete Homework</li>
+      <li>Buy Milk</li>
+      <li>Read Quran</li>
+      <li>Complete Homework</li>
+      <li>Buy Milk</li>
+      <li>Read Quran</li>
+      <li>Complete Homework</li>
+    </ul>
+
+    <script>
+  
+
+        const todoList = document.querySelectorAll("#todo-list li");
+        todoList.forEach((item) => {
+          item.addEventListener("dblclick", () => {
+            const currentText = item.textContent;
+
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = currentText;
+
+            item.textContent = "";
+            item.appendChild(input);
+
+            input.focus();
+
+            input.addEventListener("blur", () => {
+              item.textContent = input.value;
+            });
+            input.addEventListener("keydown", (e) => {
+              if (e.key === "Enter") {
+                item.textContent = input.value;
+              }
+            });
+          });
+        });
+    </script>
+  </body>
+</html>
