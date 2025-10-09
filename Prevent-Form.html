@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="loginForm">
+  <label>Username:</label>
+  <input type="text" id="username" required />
+
+  <label>Password:</label>
+  <input type="password" id="password" required />
+
+  <button type="submit">Login</button>
+
+  <p id="error" ></p>
+</form>
+<script>
+
+
+const loginForm = document.getElementById("loginForm");
+const password =  document.getElementById("password");
+const  error = document.getElementById("error");
+
+let a = "Login successful!"
+
+
+loginForm.addEventListener("submit",(event)=>{
+
+
+    event.preventDefault()
+
+    if(password.value.length<8){
+
+error.textContent=`  "Password must be at least 8 characters long!" `;
+
+error.style.color= 'red'
+
+
+    }else{
+
+        error.textContent = '';
+      
+        alert(`${a}`)
+        error.style.color = 'green';
+
+    }
+
+
+
+})
+
+
+
+
+
+</script>
+
+</body>
+</html>
