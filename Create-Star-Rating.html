@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating</title>
+<style>
+    #rating-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 25px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .stars {
+        font-size: 2.5em; /* Large stars */
+        color: #ccc; /* Default gray color */
+        cursor: pointer;
+        user-select: none; /* Prevent text selection */
+        margin-bottom: 15px;
+    }
+
+    .stars .star {
+        transition: color 0.2s; /* Smooth transition for color change */
+    }
+
+    .stars .star.selected {
+        color: gold; /* Gold color for selected stars */
+    }
+
+    /* Optional: Hover effect */
+
+
+    #current-rating-display {
+        font-weight: bold;
+        color: #333;
+    }
+
+    #submit-rating-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s;
+    }
+
+    #submit-rating-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div id="rating-container">
+    <h2>Rate This Product:</h2>
+    <div class="stars" data-rating="0">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+    <p>You rated: <span id="current-rating-display">0</span> stars</p>
+    <button id="submit-rating-btn">Submit Rating</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const starContainer = document.querySelector('.stars');
+        const stars = document.querySelectorAll('.star');
+        const currentRatingDisplay = document.getElementById('current-rating-display');
+        const submitButton = document.getElementById('submit-rating-btn');
+
+        let currentRating = 0; // Stores the user's selected rating
+
+        // --- Function to update star visuals based on a given rating ---
+        function updateStars(rating) {
+            stars.forEach(star => {
+                // If the star's data-value is less than or equal to the rating, add 'selected' class
+                // Otherwise, remove it
+                if (parseInt(star.dataset.value) <= rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+            currentRatingDisplay.textContent = rating;
+        }
+
+
+        starContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('star')) {
+                const clickedRating = parseInt(event.target.dataset.value);
+                currentRating = clickedRating; 
+                updateStars(currentRating); 
+            }
+        });
+
+        starContainer.addEventListener('mouseover', (event) => {
+            if (event.target.classList.contains('star')) {
+                const hoverRating = parseInt(event.target.dataset.value);
+                
+                stars.forEach(star => {
+                    if (parseInt(star.dataset.value) <= hoverRating) {
+                        star.classList.add('hover-highlight');
+                    } else {
+                        star.classList.remove('hover-highlight');
+                    }
+                });
+        
+            }
+        });
+
+        starContainer.addEventListener('mouseout', () => {
+      
+            stars.forEach(star => star.classList.remove('hover-highlight'));
+          
+            updateStars(currentRating); 
+        });
+
+
+     
+        submitButton.addEventListener('click', () => {
+            if (currentRating === 0) {
+                alert("Please select a rating before submitting!");
+            } else {
+                alert(`You have successfully submitted a ${currentRating}-star rating! (In a real app, this would send data to a server)`);
+             
+            }
+        });
+
+        d
+        updateStars(0); 
+    });
+</script>
+
+</body>
+</html>
+</html>
