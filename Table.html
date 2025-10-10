@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f4f7f9;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+      }
+      #app-container {
+        width: 100%;
+        max-width: 1000px;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #1e3a8a;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      #expense-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+      #expense-table th,
+      #expense-table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #e0e7ff;
+      }
+      #expense-table th {
+        background-color: #eff6ff;
+        color: #1e3a8a;
+        font-weight: 700;
+      }
+      #expense-table tbody tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      #expense-table input[type="date"],
+      #expense-table input[type="text"],
+      #expense-table input[type="number"] {
+        width: 90%;
+        padding: 6px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      #expense-table input:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+      }
+      .remove-btn {
+        background-color: #ef4444;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background-color 0.2s;
+      }
+      .remove-btn:hover {
+        background-color: #b91c1c;
+      }
+      #add-row-btn {
+        background-color: #10b981;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: background-color 0.2s;
+        width: 100%;
+      }
+      #add-row-btn:hover {
+        background-color: #059669;
+      }
+      #totals-container {
+        margin-top: 20px;
+        text-align: right;
+        font-weight: 700;
+        font-size: 1.1em;
+      }
+      #export-btn {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app-container">
+      <h1>Dini Book Shop</h1>
+
+      <table id="expense-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Amount ($)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="expense-table-body">
+          <tr>
+            <td><input type="date" /></td>
+            <td><input type="text" value="" placeholder="books name" /></td>
+            <td><input type="number" value="" min="1" /></td>
+            <td>
+              <input type="number" value="" step="0.01" placeholder="0.00" />
+            </td>
+            <td>
+              <button class="remove-btn">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button id="add-row-btn">Add New Expense</button>
+      <button id="export-btn"><i class="fa-solid fa-download"></i></button>
+
+      <div id="totals-container">
+        Delivery Charge: $<input
+          type="number"
+          id="delivery-charge"
+          value="59"
+          step="0.01"
+          style="width: 80px"
+        />
+        <br />
+        Total: $<span id="total-expense"></span>
+      </div>
+    </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const addRowButton = document.getElementById("add-row-btn");
+    const exportButton = document.getElementById("export-btn");
+    const tableBody = document.getElementById("expense-table-body");
+    const totalDisplay = document.getElementById("total-expense");
+    const deliveryInput = document.getElementById("delivery-charge");
+
+   
+    function getCurrentDate() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    }
+
+    function calculateTotal() {
+      let total = 0;
+      tableBody.querySelectorAll("tr").forEach((row) => {
+        const qty = parseFloat(row.cells[2].querySelector("input").value) || 0;
+        const amount = parseFloat(row.cells[3].querySelector("input").value) || 0;
+        total += qty * amount;
+      });
+      total += parseFloat(deliveryInput.value) || 0;
+      totalDisplay.textContent = total.toFixed(2);
+    }
+
+    
+    function addExpenseRow() {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td><input type="date" value="${getCurrentDate()}"></td>
+        <td><input type="text" placeholder="Description"></td>
+        <td><input type="number" value="1" min="1"></td>
+        <td><input type="number" value="0.00" step="0.01" placeholder="0.00"></td>
+        <td><button class="remove-btn"><i class="fa-solid fa-minus"></i></button></td>
+      `;
+      tableBody.appendChild(newRow);
+      newRow.querySelector('input[type="text"]').focus();
+      calculateTotal();
+    }
+
+    
+    function exportToCSV() {
+      const rows = [["Date", "Description", "Quantity", "Amount"]];
+      tableBody.querySelectorAll("tr").forEach((row) => {
+        const date = row.cells[0].querySelector("input").value; 
+        const desc = row.cells[1].querySelector("input").value;
+        const qty = row.cells[2].querySelector("input").value;
+        const amount = row.cells[3].querySelector("input").value;
+        rows.push([date, desc, qty, amount]);
+      });
+      rows.push(["Delivery Charge", "", "", deliveryInput.value]);
+      rows.push(["Total", "", "", totalDisplay.textContent]);
+
+      let csvContent = rows.map((e) => e.join(",")).join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "expenses.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+
+    addRowButton.addEventListener("click", addExpenseRow);
+
+    tableBody.addEventListener("click", (e) => {
+      if (e.target.closest(".remove-btn")) {
+        e.target.closest("tr").remove();
+        calculateTotal();
+      }
+    });
+
+    tableBody.addEventListener("input", calculateTotal);
+    deliveryInput.addEventListener("input", calculateTotal);
+
+  
+    tableBody.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const inputs = Array.from(tableBody.querySelectorAll("input"));
+        const idx = inputs.indexOf(document.activeElement);
+        if (idx >= 0 && idx < inputs.length - 1) {
+          inputs[idx + 1].focus();
+        } else {
+          addExpenseRow();
+        }
+      }
+    });
+
+    exportButton.addEventListener("click", exportToCSV);
+
+    calculateTotal();
+  });
+</script>
+
+  </body>
+</html>
