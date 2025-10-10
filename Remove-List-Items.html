@@ -1,0 +1,131 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Shopping List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* CSS is defined below */
+        #list-container {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+        }
+
+        #item-input {
+            padding: 8px;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #add-btn {
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #add-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        #grocery-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #grocery-list li {
+            display: flex; /* To align item text and button */
+            justify-content: space-between; /* Puts space between item and button */
+            align-items: center;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+    
+        .remove-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div id="list-container">
+    <h2> To-do list  </h2>
+    
+    <div>
+        <input type="text" id="item-input" placeholder=" text - To-do list">
+        <button id="add-btn">Add Item</button>
+    </div>
+
+    <ul id="grocery-list">
+        </ul>
+</div>
+
+<script>
+  
+         document.addEventListener('DOMContentLoaded', () => {
+    const itemInput = document.getElementById('item-input');
+    const addButton = document.getElementById('add-btn');
+    const groceryList = document.getElementById('grocery-list');
+
+
+    
+
+
+
+
+    function addItem() {
+        const itemText = itemInput.value.trim();
+        console.log(itemText);
+        
+
+        if (itemText === '') {
+            alert("Please enter an item.");
+            return;
+        }
+
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <span>${itemText}</span>
+            <button class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+        `;
+
+        groceryList.appendChild(listItem);
+        itemInput.value = '';
+    }
+
+    function removeItem(event) {
+        if (event.target.classList.contains('remove-btn') || event.target.closest('.remove-btn')) {
+            const listItem = event.target.closest('li');
+            listItem.remove();
+        }
+    }
+
+    addButton.addEventListener('click', addItem);
+
+    itemInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            addItem();
+        }
+    });
+
+    groceryList.addEventListener('click', removeItem);
+});
+
+</script>
+
+</body>
+</html>
