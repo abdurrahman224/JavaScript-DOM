@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@lowlighter/matcha/dist/matcha.min.css" />
+</head>
+<body>
+    <h2>Search </h2>
+    <p>Search Filter
+</p>
+
+<input type="text" id="name"
+<form>
+  <label for="country">Choose your country</label>
+   <select id="country" name="country">
+    <option value="0">--Select--</option>
+
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
+
+
+ <form class="contact-form" id="contactForm">
+    <h2>Contact Us</h2>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" rows="4" placeholder="Write your message..." required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+<a href="https://google.com" id="link">Go to Google</a>
+
+
+
+
+<script src="./countries .js"></script>
+
+<script>
+
+const name = document.getElementById('name')
+
+name.addEventListener('keydown', function (event){
+
+
+
+    const keyCode = event.keyCode;
+    console.log(keyCode);
+    
+    
+})
+
+
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener("submit",function (event){
+
+
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    console.log(email);
+    const Name = document.getElementById('name').value;
+    console.log(Name);
+    const message = document.getElementById('message').value;
+    console.log(message);
+
+
+
+})
+document.getElementById('link').addEventListener('click', function(event) {
+  event.preventDefault();
+  console.log("Link clicked, but not redirected!");
+});
+
+const dropdown = document.getElementById('country')
+countries.forEach(countr => {
+    const option = document.createElement('option');
+    option.value = countr;
+    option.innerText = countr;
+   dropdown.appendChild(option)
+});
+
+
+</script>
+
+
+</body>
+</html>
