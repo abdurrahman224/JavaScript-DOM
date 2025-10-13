@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Progress Tracker</title>
+    <style>
+      /* Basic styling for the body */
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f9;
+        margin: 0;
+        flex-direction: column;
+      }
+
+      .progress-container {
+        width: 80%;
+        max-width: 600px;
+        background-color: #e0e0e0;
+        border-radius: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden; /* Ensures the inner bar has rounded corners */
+      }
+
+      #progress-bar {
+        width: 0%;
+        height: 30px;
+        background-color: #4caf50;
+        border-radius: 25px;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+        transition: width 0.5s ease-in-out;
+      }
+
+      #complete-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      #complete-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>My Course Progress</h2>
+
+    <div class="progress-container">
+      <div id="progress-bar">0%</div>
+    </div>
+
+    <button id="complete-btn">Complete Lesson</button>
+    <script>
+const completeBtn = document.getElementById('complete-btn');
+const progressBar = document.getElementById('progress-bar');
+let currentProgress = 0;
+completeBtn.addEventListener('click',()=>{
+
+if(currentProgress<100){
+
+
+    currentProgress +=10;
+    progressBar.style.width = currentProgress +'%'
+    progressBar.textContent = currentProgress + '%'
+    completeBtn.st
+
+} else {
+    alert('Progress is already 100% complete!');
+    completeBtn.style.backgroundColor = '#008000'
+
+}
+})
+
+
+    </script>
+  </body>
+</html>
