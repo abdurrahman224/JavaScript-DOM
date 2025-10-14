@@ -1,95 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@lowlighter/matcha/dist/matcha.min.css" />
-</head>
-<body>
-    <h2>Search </h2>
-    <p>Search Filter
-</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country Search Dropdown</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@lowlighter/matcha/dist/matcha.min.css"
+    />
+  </head>
+  <body>
+    <h2>Search Country</h2>
+    <p>Type a country name to filter:</p>
 
-<input type="text" id="name"
-<form>
-  <label for="country">Choose your country</label>
-   <select id="country" name="country">
-    <option value="0">--Select--</option>
+    <input
+      type="text"
+      id="search"
+      placeholder="Start typing a country name..."
+    />
 
-  </select>
+    <form>
+      <label for="country">Choose your country</label>
+      <select id="country" name="country">
+        <option value="0">--Select--</option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
 
-  <button type="submit">Submit</button>
-</form>
+    <script>
+      const countries = [
+        "Afghanistan",
+        "Albania",
+        "Algeria",
+        "Andorra",
+        "Angola",
+        "Argentina",
+        "Armenia",
+        "Australia",
+        "Austria",
+        "Azerbaijan",
+        "Bahrain",
+        "Bangladesh",
+        "Belarus",
+        "Belgium",
+        "Bhutan",
+        "Brazil",
+        "Bulgaria",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "China",
+        "Colombia",
+        "Cuba",
+        "Denmark",
+        "Egypt",
+        "Finland",
+        "France",
+        "Germany",
+        "Ghana",
+        "Greece",
+        "Hong Kong",
+        "Hungary",
+        "India",
+        "Indonesia",
+        "Iran",
+        "Iraq",
+        "Ireland",
+        "Israel",
+        "Italy",
+        "Japan",
+        "Jordan",
+        "Kenya",
+        "Kuwait",
+        "Lebanon",
+        "Libya",
+        "Sri Lanka",
+        "Malaysia",
+        "Maldives",
+        "Mexico",
+        "Myanmar",
+        "Nepal",
+        "Netherlands",
+        "Nigeria",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Palestine",
+        "Philippines",
+        "Poland",
+        "Portugal",
+        "Qatar",
+        "Russia",
+        "Saudi Arabia",
+        "Singapore",
+        "South Africa",
+        "South Korea",
+        "Spain",
+        "Sweden",
+        "Switzerland",
+        "Syria",
+        "Thailand",
+        "Turkey",
+        "United Arab Emirates",
+        "United Kingdom",
+        "United States",
+        "Vietnam",
+        "Yemen",
+      ];
 
+      const dropdown = document.getElementById("country");
+      const search = document.getElementById("search");
 
- <form class="contact-form" id="contactForm">
-    <h2>Contact Us</h2>
+      function renderOptions(list) {
+        let options = '<option value="0">--Select--</option>';
+        list.forEach((country) => {
+          options += `<option value="${country}">${country}</option>`;
+        });
+        dropdown.innerHTML = options;
+      }
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" placeholder="Enter your name" required>
+      renderOptions(countries);
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" placeholder="Enter your email" required>
+     
+      search.addEventListener("input", function () {
+        const searchValue = this.value.toLowerCase();
+        const filtered = countries.filter((c) =>
+          c.toLowerCase().startsWith(searchValue)
+        );
+        renderOptions(filtered.length ? filtered : countries); 
+      });
 
-    <label for="message">Message:</label>
-    <textarea id="message" rows="4" placeholder="Write your message..." required></textarea>
-
-    <button type="submit">Send Message</button>
-  </form>
-<a href="https://google.com" id="link">Go to Google</a>
-
-
-
-
-<script src="./countries .js"></script>
-
-<script>
-
-const name = document.getElementById('name')
-
-name.addEventListener('keydown', function (event){
-
-
-
-    const keyCode = event.keyCode;
-    console.log(keyCode);
-    
-    
-})
-
-
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener("submit",function (event){
-
-
-    event.preventDefault();
-    const email = document.getElementById('email').value;
-    console.log(email);
-    const Name = document.getElementById('name').value;
-    console.log(Name);
-    const message = document.getElementById('message').value;
-    console.log(message);
-
-
-
-})
-document.getElementById('link').addEventListener('click', function(event) {
-  event.preventDefault();
-  console.log("Link clicked, but not redirected!");
-});
-
-const dropdown = document.getElementById('country')
-countries.forEach(countr => {
-    const option = document.createElement('option');
-    option.value = countr;
-    option.innerText = countr;
-   dropdown.appendChild(option)
-});
-
-
-</script>
-
-
-</body>
+      dropdown.addEventListener("change", function () {
+        console.log("Selected Country:", this.value);
+      });
+    </script>
+  </body>
 </html>
